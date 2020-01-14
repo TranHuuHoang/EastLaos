@@ -1,12 +1,31 @@
 const express = require('express')
 const router = new express.Router()
+const auth = require('../middleware/auth')
 
-router.get('/concac', async (req, res) => {
+router.post('/users', async (req, res) => {
     try {
-        res.send('con cac')
+
+    }
+    catch(e){
+
+    }
+})
+
+router.post('/users/login', async (req, res) => {
+    try {
+
+    }
+    catch(e){
+
+    } 
+})
+
+router.post('/users/logout', auth, async (req, res) => {
+    try {
+
     }
     catch (e){
-        res.status(404).send()
+        
     }
 })
 
