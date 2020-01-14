@@ -6,7 +6,14 @@
 
 - Default password for root user in: `/var/log/mysqld.log`
 
-# CREATE USER
+# CMD UI
 
-- `CREATE USER "demo"@"localhost" IDENTIFIED BY "password"`
+- mysql -u root -p
 
+# CREATE USER AND DATABASE
+
+- CREATE USER "test"@"localhost" IDENTIFIED BY "EastLaos312#";
+
+- CREATE DATABASE EastLaos;
+
+- GRANT ALL PRIVILEGES ON EastLaos.* TO "test"@"localhost";
