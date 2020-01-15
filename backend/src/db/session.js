@@ -27,33 +27,43 @@ const Session = class {
   // student
   async createStudent(id, email, password, salt) {
     return this.executeSQL(
-      `INSERT INTO student VALUES (${id}, ${email}, ${password}, ${salt})`
+      `INSERT INTO student
+      VALUES (${id}, ${email}, ${password}, ${salt})`
     );
   }
   async updateStudentPassword(id, password, salt) {
     return this.executeSQL(
-      `UPDATE student SET password = ${password}, salt = ${salt} WHERE id = ${id}`
+      `UPDATE student
+      SET password = ${password}, salt = ${salt}
+      WHERE id = ${id}`
     );
   }
   async findStudentById(id) {
     return this.executeSQL(
-      `SELECT * FROM student WHERE id = ${id}`
+      `SELECT *
+      FROM student
+      WHERE id = ${id}`
     );
   }
   // tutor
   async createTutor(id, email, password, salt) {
     return this.executeSQL(
-      `INSERT INTO tutor VALUES (${id}, ${email}, ${password}, ${salt})`
+      `INSERT INTO tutor
+      VALUES (${id}, ${email}, ${password}, ${salt})`
     )
   }
   async updateTutorPassword(id, password, salt) {
     return this.executeSQL(
-      `UPDATE tutor SET password = ${password}, salt = ${salt} WHERE id = ${id}`
+      `UPDATE tutor
+      SET password = ${password}, salt = ${salt}
+      WHERE id = ${id}`
     );
   }
   async findtutorById(id) {
     return this.executeSQL(
-      `SELECT * FROM tutor WHERE id = ${id}`
+      `SELECT *
+      FROM tutor
+      WHERE id = ${id}`
     );
   }
 }
