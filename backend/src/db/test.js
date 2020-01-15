@@ -4,11 +4,12 @@ const {promisify} = require("util")
 const readFilePromise = promisify(readFile) 
 
 const session = new Session();
-const file = readFilePromise("./src/db/schema.sql")
+const schemaFile = readFilePromise("./src/db/schema.sql");
+const testFile = readFilePromise("./src/db/test.sql");
 
 const test = async function() {
-  const filedata = await file;
-  filedata.toString().split(";").forEach(async function(line) {
+  const schemaData = await schemaFile;
+  schemaData.toString().split(";").forEach(async function(line) {
     if (line.length > 0) {
       const out = await session.executeSQL(line);
       console.log(line)
