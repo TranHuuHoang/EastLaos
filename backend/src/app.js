@@ -1,9 +1,9 @@
 const express = require('express')
-const studentRouter = require('../routers/studentRouter')
-const courseRouter = require('../routers/courseRouter')
-const matchingRouter = require('../routers/matchingRouter')
-const quizRouter = require('../routers/quizRouter')
-const tutorRouter = require('../routers/tutorRouter')
+const studentRouter = require('./routers/studentRouter')
+const courseRouter = require('./routers/courseRouter')
+const matchingRouter = require('./routers/matchingRouter')
+const quizRouter = require('./routers/quizRouter')
+const tutorRouter = require('./routers/tutorRouter')
 
 const app = express()
 
