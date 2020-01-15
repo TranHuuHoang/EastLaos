@@ -9,9 +9,11 @@ const file = readFilePromise("./src/db/schema.sql")
 const test = async function() {
   const filedata = await file;
   filedata.toString().split(";").forEach(async function(line) {
-    const out = await session.executeSQL(line);
-    console.log(line)
-    console.log(out);
+    if (line.length > 0) {
+      const out = await session.executeSQL(line);
+      console.log(line)
+      console.log(out);
+    }
   });
 }
 
