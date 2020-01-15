@@ -34,5 +34,9 @@ mysqlx.getSession(options).then(function(session) {
     console.log(result.fetchAll())
   }).catch(error)
 
+  session.sql(`DROP TABLE IF EXISTS TableA;`).execute().then(function(result) {
+    console.log(result.fetchAll())
+  }).catch(error)
+
   session.close()
 }).catch(error);
