@@ -4,14 +4,14 @@ const auth = require('../middleware/auth')
 const sha512 = require('../utils/pwdHashSalt')
 const {dbSession} = require('../db/session')
 
-const counter = 1
+let counter = 1
 
 router.post('/students/signup', async (req, res) => {
     try {
         const student = req.body
         const pwdHashAndSalt = sha512(student.password)
-        await dbSession.createStudent(counter, student.email, pwdHashAndSalt.password, pwdHashAndSalt.salt)
         counter++
+        await dbSession.createStudent(counter, student.email, pwdHashAndSalt.password, pwdHashAndSalt.salt)
         res.status(201).send()
     }
     catch(e){
