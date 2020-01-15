@@ -1,42 +1,14 @@
-const mysqlx = require("@mysql/xdevapi")
+const {Session} = require("./session.js")
 
-const error = function(value) {
-  throw value;
-}
+const session = new Session();
 
-const options = {
-  host: "localhost",
-  user: "test",
-  password: "EastLaos312#",
-  schema: "EastLaos",
-};
+const out = session.executeSQL("SELECT 1+1;")
 
-mysqlx.getSession(options).then(function(session) {
-  console.log(session.inspect());
+out.then(function(value) {
+  console.log(value);
+})
 
-  session.sql("DROP TABLE IF EXISTS TableA;").execute().then(function(result) {
-    console.log(result.fetchAll())
-  }).catch(error)
 
-  session.sql("CREATE TABLE TableA (id int(32));").execute().then(function(result) {
-    console.log(result.fetchAll())
-  }).catch(error)
+console.log()
 
-  session.sql(`INSERT INTO TableA(id) VALUES (${2});`).execute().then(function(result) {
-    console.log(result.fetchAll())
-  }).catch(error)
 
-  session.sql(`INSERT INTO TableA(id) VALUES (${3});`).execute().then(function(result) {
-    console.log(result.fetchAll())
-  }).catch(error)
-
-  session.sql(`SELECT * FROM TableA;`).execute().then(function(result) {
-    console.log(result.fetchAll())
-  }).catch(error)
-
-  session.sql(`DROP TABLE IF EXISTS TableA;`).execute().then(function(result) {
-    console.log(result.fetchAll())
-  }).catch(error)
-
-  session.close()
-}).catch(error);
