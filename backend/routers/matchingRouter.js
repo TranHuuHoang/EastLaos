@@ -20,5 +20,22 @@ router.get('/subject', auth, async (req, res) => {
     }
 })
 
+router.post('/student_match', auth, async (req, res) => {
+    try {
+
+    }   
+    catch (e){
+
+    }    
+})
+
+router.post('/tutor_match', auth, async (req, res) => {
+    try {
+
+    }
+    catch (e){
+
+    }
+})
 
 module.exports = router

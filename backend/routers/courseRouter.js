@@ -13,7 +13,6 @@ router.get('/course_details', auth, async(req, res) => {
 
 router.post('/courses', auth, async(req, res) => {
     try {
-        
     }
     catch (e){
 
