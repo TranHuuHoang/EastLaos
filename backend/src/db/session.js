@@ -1,0 +1,72 @@
+const mysqlx = require("@mysql/xdevapi")
+
+const error = function(value) {
+  throw value;
+}
+
+const options = {
+  host: "localhost",
+  user: "test",
+  password: "EastLaos312#",
+  schema: "EastLaos",
+};
+
+const Session = class {
+  constructor() {
+    this.session = mysqlx.getSession(options)
+  }
+  async executeSQL(text) {
+    const session = await this.session;
+    const result = await session.sql(text).execute();
+    return result.fetchAll();
+  }
+  // student
+  async createStudent(id, email, password, salt) {
+    await this.executeSQL(
+      `INSERT INTO student
+      VALUES (${id}, "${email}", "${password}", "${salt}")`
+    );
+  }
+  async deleteStudent(id) {
+    await this.executeSQL(
+      `DELETE FROM student
+      WHERE id = ${id}`
+    );
+  }
+  async updateStudentPassword(id, password, salt) {
+    await this.executeSQL(
+      `UPDATE student
+      SET password = "${password}", salt = "${salt}"
+      WHERE id = ${id}`
+    );
+  }
+  async findStudentById(id) {
+    const out = await this.executeSQL(
+      `SELECT (id, email, password, salt)
+      FROM student
+      WHERE id = ${id}`
+    );
+    return {
+      id: out[0][0],
+      email: out[0][1],
+      password: out[0][2],
+      salt: out[0][3],
+    };
+  }
+  async findStudentByEmail(email) {
+    const out = await this.executeSQL(
+      `SELECT (id, email, password, salt)
+      FROM student
+      WHERE email = "${email}"`
+    );
+    return {
+      id: out[0][0],
+      email: out[0][1],
+      password: out[0][2],
+      salt: out[0][3],
+    };
+  }
+}
+
+const dbSession = new Session()
+module.exports = {dbSession};
