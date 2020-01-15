@@ -1,9 +1,7 @@
-const {Session} = require("./session.js")
+const {dbSession: session} = require("./session.js")
 const {readFile} = require("fs")
 const {promisify} = require("util")
 const readFilePromise = promisify(readFile) 
-
-const session = new Session();
 
 const execFile = async function(filename) {
   const data = (await readFilePromise(filename)).toString().split(";");

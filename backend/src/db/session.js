@@ -76,4 +76,5 @@ const Session = class {
   }
 }
 
-module.exports = {Session};
+const dbSession = new Session()
+module.exports = {dbSession};
