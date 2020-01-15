@@ -2,16 +2,22 @@ const jwt = require('jsonwebtoken')
 
 const auth = async (req, res, next) => {
     try {
-        // const token = req.header('Authorization').replace('Bearer ', '')
-        // const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const token = req.header('Authorization').replace('Bearer ', '')
+        const decoded = jwt.verify(token, "eastlaossecret")
 
-        // //the 'tokens.token' part is used to authorize the current token to see if it's still valid.
-        // const user = await User.findOne({_id: decoded._id, 'tokens.token': token})
-        // if (!user){
-        //     throw new Error()
-        // }
-        // req.token = token
-        // req.user = user
+        if (decoded.type.localeCompare("student")){
+            //retrieve user according to ID
+            const user = "a"
+        }
+        else if (decoded.type.localeCompare("tutor")){
+            const user = "a"
+        }
+        if (!user){
+            throw new Error()
+        }
+        
+        req.token = token
+        req.user = user
         next()
     }
     catch (e) {
