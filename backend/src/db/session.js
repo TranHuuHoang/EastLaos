@@ -16,9 +16,13 @@ const Session = class {
     this.session = mysqlx.getSession(options)
   }
   async executeSQL(text) {
-    const session = await this.session;
-    const result = await session.sql(text).execute();
-    return result.fetchAll();
+    try {
+      const session = await this.session;
+      const result = await session.sql(text).execute();
+      return result.fetchAll();
+    } catch (e) {
+      throw e;
+    }
   }
   // student
   async createStudent(id, email, password, salt) {
