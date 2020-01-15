@@ -22,57 +22,72 @@ const Session = class {
   }
   // student
   async createStudent(id, email, password, salt) {
-    return this.executeSQL(
-      `INSERT INTO student
-      VALUES (${id}, "${email}", "${password}", "${salt}")`
-    );
+    try {
+      await this.executeSQL(
+        `INSERT INTO student
+        VALUES (${id}, "${email}", "${password}", "${salt}")`
+      );
+      return;
+    } catch (e) {
+      throw e;
+    }
   }
   async deleteStudent(id) {
-    return this.executeSQL(
-      `DELETE FROM student
-      WHERE id = ${id}`
-    )
+    try {
+      await this.executeSQL(
+        `DELETE FROM student
+        WHERE id = ${id}`
+      );
+      return;
+    } catch (e) {
+      throw e;
+    }
   }
   async updateStudentPassword(id, password, salt) {
-    return this.executeSQL(
-      `UPDATE student
-      SET password = "${password}", salt = "${salt}"
-      WHERE id = ${id}`
-    );
+    try {
+      await this.executeSQL(
+        `UPDATE student
+        SET password = "${password}", salt = "${salt}"
+        WHERE id = ${id}`
+      );
+      return;
+    } catch (e) {
+      throw e;
+    }
   }
   async findStudentById(id) {
-    return this.executeSQL(
-      `SELECT *
-      FROM student
-      WHERE id = ${id}`
-    );
+    try {
+      const out = await this.executeSQL(
+        `SELECT (id, email, password, salt)
+        FROM student
+        WHERE id = ${id}`
+      );
+      return {
+        id: out[0][0],
+        email: out[0][1],
+        password: out[0][2],
+        salt: out[0][3],
+      };
+    } catch (e) {
+      throw e;
+    }
   }
-  // tutor
-  async createTutor(id, email, password, salt) {
-    return this.executeSQL(
-      `INSERT INTO tutor
-      VALUES (${id}, "${email}", "${password}", "${salt}")`
-    );
-  }
-  async deleteTutor(id) {
-    return this.executeSQL(
-      `DELETE FROM tutor
-      WHERE id = ${id}`
-    )
-  }
-  async updateTutorPassword(id, password, salt) {
-    return this.executeSQL(
-      `UPDATE tutor
-      SET password = "${password}", salt = "${salt}"
-      WHERE id = ${id}`
-    );
-  }
-  async findTutorById(id) {
-    return this.executeSQL(
-      `SELECT *
-      FROM student
-      WHERE id = ${id}`
-    );
+  async findStudentByEmail(email) {
+    try {
+      const out = await this.executeSQL(
+        `SELECT (id, email, password, salt)
+        FROM student
+        WHERE email = "${email}"`
+      );
+      return {
+        id: out[0][0],
+        email: out[0][1],
+        password: out[0][2],
+        salt: out[0][3],
+      };
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
