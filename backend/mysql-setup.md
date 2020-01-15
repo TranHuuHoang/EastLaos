@@ -17,3 +17,7 @@
 - CREATE DATABASE EastLaos;
 
 - GRANT ALL PRIVILEGES ON EastLaos.* TO "test"@"localhost";
+
+# CREATE SCHEMA 
+
+- mysql -u test -p < src/db/schema.sql
