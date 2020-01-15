@@ -3,6 +3,7 @@ const studentRouter = require('../routers/studentRouter')
 const courseRouter = require('../routers/courseRouter')
 const tutorMatchingRouter = require('../routers/tutorMatchingRouter')
 const quizRouter = require('../routers/quizRouter')
+const tutorRouter = require('../routers/tutorRouter')
 
 const app = express()
 
@@ -12,5 +13,6 @@ app.use(studentRouter)
 app.use(courseRouter)
 app.use(tutorMatchingRouter)
 app.use(quizRouter)
+app.use(tutorRouter)
 
 module.exports = app
