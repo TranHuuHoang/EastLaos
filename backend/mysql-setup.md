@@ -1,8 +1,8 @@
 # INSTALLATION
 
-- Install the package: `sudo apt-get instal mysql-server`
+- Install the package: `sudo apt-get install mysql-server`
 
-- Start MySQL service: `systemctl start mysqld.service`
+- Start MySQL service: `sudo systemctl start mysql`
 
 - Default password for root user in: `/var/log/mysqld.log`
 
