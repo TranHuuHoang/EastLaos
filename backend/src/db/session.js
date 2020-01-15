@@ -47,6 +47,33 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
+  // tutor
+  async createTutor(id, email, password, salt) {
+    return this.executeSQL(
+      `INSERT INTO tutor
+      VALUES (${id}, "${email}", "${password}", "${salt}")`
+    );
+  }
+  async deleteTutor(id) {
+    return this.executeSQL(
+      `DELETE FROM tutor
+      WHERE id = ${id}`
+    )
+  }
+  async updateTutorPassword(id, password, salt) {
+    return this.executeSQL(
+      `UPDATE tutor
+      SET password = "${password}", salt = "${salt}"
+      WHERE id = ${id}`
+    );
+  }
+  async findTutorById(id) {
+    return this.executeSQL(
+      `SELECT *
+      FROM student
+      WHERE id = ${id}`
+    );
+  }
 }
 
 module.exports = {Session};
