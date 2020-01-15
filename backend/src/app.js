@@ -1,7 +1,7 @@
 const express = require('express')
 const studentRouter = require('../routers/studentRouter')
 const courseRouter = require('../routers/courseRouter')
-const matchRouter = require('../routers/matchRouter')
+const matchingRouter = require('../routers/matchingRouter')
 const quizRouter = require('../routers/quizRouter')
 const tutorRouter = require('../routers/tutorRouter')
 
@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(studentRouter)
 app.use(courseRouter)
-app.use(matchRouter)
+app.use(matchingRouter)
 app.use(quizRouter)
 app.use(tutorRouter)
 
