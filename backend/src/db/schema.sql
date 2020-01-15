@@ -15,6 +15,7 @@ CREATE TABLE student (
   id        int(32) NOT NULL,
   email     varchar(256) NOT NULL,
   password  varchar(256) NOT NULL,
+  salt      varchar(256) NOT NULL,
   CONSTRAINT uaStudentID UNIQUE(id),
   CONSTRAINT uaStudentEmail UNIQUE(email)
 
@@ -24,6 +25,7 @@ CREATE TABLE tutor (
   id        int(32) NOT NULL,
   email     varchar(256) NOT NULL,
   password  varchar(256) NOT NULL,
+  salt      varchar(256) NOT NULL,
   CONSTRAINT uaTutorId UNIQUE(id),
   CONSTRAINT uaTutorEmail UNIQUE(email)
 );

@@ -1,8 +1,8 @@
 # INSTALLATION
 
-- Install the package: `sudo apt-get instal mysql-server`
+- Install the package: `sudo apt-get install mysql-server`
 
-- Start MySQL service: `systemctl start mysqld.service`
+- Start MySQL service: `sudo systemctl start mysql`
 
 - Default password for root user in: `/var/log/mysqld.log`
 
@@ -17,3 +17,7 @@
 - CREATE DATABASE EastLaos;
 
 - GRANT ALL PRIVILEGES ON EastLaos.* TO "test"@"localhost";
+
+# CREATE SCHEMA 
+
+- mysql -u test -p < src/db/schema.sql
