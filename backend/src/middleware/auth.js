@@ -8,10 +8,10 @@ const auth = async (req, res, next) => {
 
         if (decoded.type.localeCompare("student")){
             //retrieve user according to ID
-            const user = dbSession.findStudentById(decoded.id)
+            const user = await dbSession.findStudentById(decoded.id)
         }
         else if (decoded.type.localeCompare("tutor")){
-            const user = dbSession.findTutorById(decoded.id)
+            const user = await dbSession.findTutorById(decoded.id)
         }
         if (!user){
             throw new Error()
