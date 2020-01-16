@@ -25,6 +25,9 @@ router.post('/student_match', auth, async (req, res) => {
     try {
         const courseCode = req.body.course_code
         const course = await dbSession.findCourseByCode(courseCode)
+        if (!course){
+            throw new Error("Wrong course code!")
+        }
         await dbSession.createStudentMatch({
             studentId: req.user.id,
             courseId: course.id
