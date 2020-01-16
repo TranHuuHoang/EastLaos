@@ -76,6 +76,62 @@ const Session = class {
       return undefined;
     }
   }
+  // tutor
+  async createTutor(param = {id: 0, email: "", password: "", salt: ""}) {
+    const {id, email, password, salt} = param;
+    await this.executeSQL(
+      `INSERT INTO tutor
+      VALUES (${id}, "${email}", "${password}", "${salt}")`
+    );
+  }
+  async deleteTutor(id) {
+    await this.executeSQL(
+      `DELETE FROM tutor
+      WHERE id = ${id}`
+    );
+  }
+  async updateTutorPassword(param = {id: 0, password: "", salt: ""}) {
+    const {id, password, salt} = param;
+    await this.executeSQL(
+      `UPDATE tutor
+      SET password = "${password}", salt = "${salt}"
+      WHERE id = ${id}`
+    );
+  }
+  async findTutorById(id) {
+    const out = await this.executeSQL(
+      `SELECT id, email, password, salt
+      FROM tutor
+      WHERE id = ${id}`
+    );
+    if (out.length >= 1) {
+      return {
+        id: out[0][0],
+        email: out[0][1],
+        password: out[0][2],
+        salt: out[0][3],
+      };
+    } else {
+      return undefined;
+    }
+  }
+  async findTutorByEmail(email) {
+    const out = await this.executeSQL(
+      `SELECT id, email, password, salt
+      FROM tutor
+      WHERE email = "${email}"`
+    );
+    if (out.length >= 1) {
+      return {
+        id: out[0][0],
+        email: out[0][1],
+        password: out[0][2],
+        salt: out[0][3],
+      };
+    } else {
+      return undefined;
+    }
+  }
 }
 
 const dbSession = new Session()
