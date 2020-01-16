@@ -62,7 +62,7 @@ router.delete('/student_match', auth, async (req, res) => {
         }
         await dbSession.deleteStudentMatch({
             studentId: req.user.id,
-            courseId: courseCode
+            courseId: course.id
         })
         res.send("Student unregistered for matching!")
     }
