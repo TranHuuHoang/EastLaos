@@ -21,7 +21,8 @@ const Session = class {
     return result.fetchAll();
   }
   // student
-  async createStudent(id, email, password, salt) {
+  async createStudent(param = {id: 0, email: "", password: "", salt: ""}) {
+    const {id, email, password, salt} = param;
     await this.executeSQL(
       `INSERT INTO student
       VALUES (${id}, "${email}", "${password}", "${salt}")`
@@ -33,7 +34,8 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
-  async updateStudentPassword(id, password, salt) {
+  async updateStudentPassword(param = {id: 0, password: "", salt: ""}) {
+    const {id, password, salt} = param;
     await this.executeSQL(
       `UPDATE student
       SET password = "${password}", salt = "${salt}"
