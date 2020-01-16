@@ -178,10 +178,10 @@ $(document).ready(function () {
           {title: "Course Information"},
           {title: "Subscribe"},
       ],
-      "columnDefs": [ {
+      "columnDefs": [{
             "targets": -1,
             "data": null,
             "defaultContent": "<a class=\"btn btn-success btn-sm\" href=#>Subscribe</a>"
-        } ]
+      }]
   });
 });
