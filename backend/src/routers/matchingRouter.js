@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
+const {dbSession} = require('../db/session')
 
 router.get('/match', auth, async (req, res) => {
     try {
@@ -20,21 +21,59 @@ router.get('/subject', auth, async (req, res) => {
     }
 })
 
-router.post('/student_match', auth, async (req, res) => {
+router.post('/student_match/:course_code', auth, async (req, res) => {
     try {
-
+        const courseCode = req.params.course_code
+        await dbSession.createStudentMatch({
+            studentId: req.user.id,
+            courseId: courseCode
+        })
+        res.status(201).send("Student successfully registered for matching!")
     }   
     catch (e){
-
+        res.status(500).send(e.message)
     }    
 })
 
-router.post('/tutor_match', auth, async (req, res) => {
+router.post('/tutor_match/:course_code', auth, async (req, res) => {
     try {
-
+        const courseCode = req.params.course_code
+        await dbSession.createTutorMatch({
+            tutorId: req.user.id,
+            courseId: courseCode
+        })
+        res.status(201).send("Tutor successfully registered for matching!")
     }
     catch (e){
+        res.status(500).send(e.message)
+    }
+})
 
+router.delete('/student_match/:course_code', auth, async (req, res) => {
+    try {
+        const courseCode = req.params.course_code
+        await dbSession.deleteStudentMatch({
+            studentId: req.user.id,
+            courseId: courseCode
+        })
+        res.send("Student unregistered for matching!")
+    }
+    catch (e){
+        res.status(500).send(e.message)
+    }
+})
+
+router.delete('/tutor_match/:course_code', auth, async (req, res) => {
+    try {
+        const courseCode = req.params.course_code
+        await dbSession.deleteTutorMatch({
+            tutorId: req.user.id,
+            courseId: courseCode
+        })
+        res.send("Tutor unregistered for matching!")
+    }
+    catch (e){
+        res.status(500).send(e.message)
     }
 })
 
