@@ -39,12 +39,16 @@ router.post('/student_match', auth, async (req, res) => {
     }    
 })
 
-router.post('/tutor_match/:course_code', auth, async (req, res) => {
+router.post('/tutor_match', auth, async (req, res) => {
     try {
-        const courseCode = req.params.course_code
+        const courseCode = req.body.course_code
+        const course = await dbSession.findCourseByCode(courseCode)
+        if (!course){
+            throw new Error("Wrong course code!")
+        }
         await dbSession.createTutorMatch({
             tutorId: req.user.id,
-            courseId: courseCode
+            courseId: course.id
         })
         res.status(201).send("Tutor successfully registered for matching!")
     }
@@ -71,12 +75,16 @@ router.delete('/student_match', auth, async (req, res) => {
     }
 })
 
-router.delete('/tutor_match/:course_code', auth, async (req, res) => {
+router.delete('/tutor_match', auth, async (req, res) => {
     try {
-        const courseCode = req.params.course_code
+        const courseCode = req.body.course_code
+        const course = await dbSession.findCourseByCode(courseCode)
+        if (!course){
+            throw new Error("Wrong course code!")
+        }
         await dbSession.deleteTutorMatch({
             tutorId: req.user.id,
-            courseId: courseCode
+            courseId: course.id
         })
         res.send("Tutor unregistered for matching!")
     }
