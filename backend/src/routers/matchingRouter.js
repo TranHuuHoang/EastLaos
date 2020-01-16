@@ -21,12 +21,13 @@ router.get('/subject', auth, async (req, res) => {
     }
 })
 
-router.post('/student_match/:course_code', auth, async (req, res) => {
+router.post('/student_match', auth, async (req, res) => {
     try {
-        const courseCode = req.params.course_code
+        const courseCode = req.body.course_code
+        const course = await dbSession.findCourseByCode(courseCode)
         await dbSession.createStudentMatch({
             studentId: req.user.id,
-            courseId: courseCode
+            courseId: course.id
         })
         res.status(201).send("Student successfully registered for matching!")
     }   
