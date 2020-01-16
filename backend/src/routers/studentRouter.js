@@ -31,12 +31,12 @@ router.post('/students/signup', async (req, res) => {
 router.post('/students/login', async (req, res) => {
     try {
         const check = req.body
-        const student = await dbSession.findStudentByEmail(req.body.email)
+        const student = await dbSession.findStudentByEmail(check.email)
         if (!student){
             throw new Error("Wrong email!")
         }
-        const hashedPwd = sha512(student.password, student.salt)
-        if (hashedPwd !== student.password){
+        const hashedPwd = sha512(check.password, student.salt)
+        if (hashedPwd.password !== student.password){
             throw new Error("Invalid password!")
         }
         const token = generateAuthToken({id: student.id}, 'student')
