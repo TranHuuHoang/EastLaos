@@ -146,27 +146,12 @@ var json_string = String.raw`{
 var course_list = JSON.parse(json_string);
 
 course_code = course_list["code"];
-console.log(course_code);
 course_name = course_list["name"];
 course_description = course_list["description"];
 
 var datazip = course_code.map(function(ele, i) {
   return [ele, course_name[i], course_description[i]];
 });
-
-// $(document).ready(function() {
-//     $('#course_table').DataTable({
-//         data: datazip,
-//         columns: [
-//             {title: "Course Code"},
-//             {title: "Course Name"},
-//             {title: "Course Information"},
-//         ]
-//     });
-// } );
-
-
-
 
 // Material Design example
 $(document).ready(function () {
