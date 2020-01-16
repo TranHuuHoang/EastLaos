@@ -170,7 +170,7 @@ var datazip = course_code.map(function(ele, i) {
 
 // Material Design example
 $(document).ready(function () {
-  $('#course_table').DataTable({
+  var table = $('#course_table').DataTable({
       data: datazip,
       columns: [
           {title: "Course Code"},
@@ -184,4 +184,9 @@ $(document).ready(function () {
             "defaultContent": "<a class=\"btn btn-success btn-sm\" href=#>Subscribe</a>"
       }]
   });
+
+  $('#course_table tbody').on('click', 'a', function () {
+        var data = table.row($(this).parents('tr')).data();
+        alert("Course code: "+ data[0]);
+    } );
 });
