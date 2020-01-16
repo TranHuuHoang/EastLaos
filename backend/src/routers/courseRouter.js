@@ -37,6 +37,9 @@ router.post('/courses', auth, async(req, res) => {
             info: req.body.info
         })
         const courseCreated = await dbSession.findCourseById(counter)
+        if (!courseCreated){
+            throw new Error("Course not created!")
+        }
         res.send(courseCreated)
     }
     catch (e){
