@@ -2,6 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 const sha512 = require('../utils/pwdHashSalt')
+const generateAuthToken = require('../utils/generateToken')
 const {dbSession} = require('../db/session')
 
 let counter = 1
@@ -12,7 +13,10 @@ router.post('/students/signup', async (req, res) => {
         const pwdHashAndSalt = sha512(student.password)
         counter++
         await dbSession.createStudent(counter, student.email, pwdHashAndSalt.password, pwdHashAndSalt.salt)
-        res.status(201).send()
+        const token = generateAuthToken({id: counter}, 'student')
+        res.status(201).send({
+            token
+        })
     }
     catch(e){
         res.status(400).send()
