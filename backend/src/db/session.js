@@ -184,7 +184,7 @@ const Session = class {
     const out = await this.executeSQL(
       `SELECT id, code, name, info
       FROM course
-      WHERE code = ${code}`
+      WHERE code = "${code}"`
     );
     if (out.length >= 1) {
       return {

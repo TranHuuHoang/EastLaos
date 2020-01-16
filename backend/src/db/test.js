@@ -34,11 +34,19 @@ const test = async function() {
       password: "cascas",
       salt: "cascas234",
     })
-    const out = await session.executeSQL(
-      `SELECT MAX(id)
-      FROM student;`
-    )
-    console.log(out);
+    await session.createTutor({
+      id: 1,
+      email: "tutu1",
+      password: "casca",
+      salt: "cascacv",
+    })
+    await session.createCourse({
+      id: 1,
+      code: "cz4041",
+      name: "khong",
+      info: "cz4041 info",
+    })
+
   } catch (e) {
     console.log(e);
   }
