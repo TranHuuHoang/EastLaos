@@ -22,6 +22,15 @@ const execFile = async function(filename) {
 const test = async function() {
   try {
     await execFile("./src/db/schema.sql");
+    session.createStudent({
+      id: 1, 
+      email: "casca",
+      password: "cascas",
+      salt: "cascas234",
+    })
+    session.findStudentById(2).then(function(value) {
+      console.log(value)
+    });
   } catch (e) {
     console.log(e);
   }

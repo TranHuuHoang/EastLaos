@@ -36,7 +36,7 @@ router.post('/students/login', async (req, res) => {
             throw new Error("Wrong email!")
         }
         const hashedPwd = sha512(student.password, student.salt)
-        if (hasedPwd !== student.password){
+        if (hashedPwd !== student.password){
             throw new Error("Invalid password!")
         }
         const token = generateAuthToken({id: student.id}, 'student')
