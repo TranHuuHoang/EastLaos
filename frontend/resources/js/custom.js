@@ -176,6 +176,12 @@ $(document).ready(function () {
           {title: "Course Code"},
           {title: "Course Name"},
           {title: "Course Information"},
-      ]
+          {title: "Subscribe"},
+      ],
+      "columnDefs": [ {
+            "targets": -1,
+            "data": null,
+            "defaultContent": "<a class=\"btn btn-success btn-sm\" href=#>Subscribe</a>"
+        } ]
   });
 });
