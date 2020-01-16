@@ -48,12 +48,16 @@ const Session = class {
       FROM student
       WHERE id = ${id}`
     );
-    return {
-      id: out[0][0],
-      email: out[0][1],
-      password: out[0][2],
-      salt: out[0][3],
-    };
+    if (out.length >= 1) {
+      return {
+        id: out[0][0],
+        email: out[0][1],
+        password: out[0][2],
+        salt: out[0][3],
+      };
+    } else {
+      return undefined;
+    }
   }
   async findStudentByEmail(email) {
     const out = await this.executeSQL(
