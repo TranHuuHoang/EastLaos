@@ -8,6 +8,7 @@ const tutorRouter = require('./routers/tutorRouter')
 const app = express()
 
 //parse incoming JSON as object so we can access it in our request handler.
+
 app.use(express.json())
 app.use(studentRouter)
 app.use(courseRouter)
