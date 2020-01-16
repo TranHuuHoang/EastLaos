@@ -5,13 +5,11 @@ const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, "eastlaossecret")
-
-        if (decoded.type.localeCompare("student")){
+        if (decoded.type === "student") {
             //retrieve user according to ID
-            const user = await dbSession.findStudentById(decoded.id)
-        }
-        else if (decoded.type.localeCompare("tutor")){
-            const user = await dbSession.findTutorById(decoded.id)
+            user = await dbSession.findStudentById(decoded.id)
+        } else if (decoded.type === "tutor") {
+            user = await dbSession.findTutorById(decoded.id)
         }
         if (!user){
             throw new Error()
@@ -22,6 +20,7 @@ const auth = async (req, res, next) => {
         next()
     }
     catch (e) {
+        console.log("error:", e.message)
         res.status(401).send({error: 'Unauthenticated user!'})
     }
 }

@@ -44,7 +44,7 @@ const Session = class {
   }
   async findStudentById(id) {
     const out = await this.executeSQL(
-      `SELECT (id, email, password, salt)
+      `SELECT id, email, password, salt
       FROM student
       WHERE id = ${id}`
     );
@@ -57,7 +57,7 @@ const Session = class {
   }
   async findStudentByEmail(email) {
     const out = await this.executeSQL(
-      `SELECT (id, email, password, salt)
+      `SELECT id, email, password, salt
       FROM student
       WHERE email = "${email}"`
     );
