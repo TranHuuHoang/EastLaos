@@ -12,7 +12,12 @@ router.post('/students/signup', async (req, res) => {
         const student = req.body
         const pwdHashAndSalt = sha512(student.password)
         counter++
-        await dbSession.createStudent(counter, student.email, pwdHashAndSalt.password, pwdHashAndSalt.salt)
+        await dbSession.createStudent({
+            id: counter, 
+            email: student.email, 
+            password: pwdHashAndSalt.password, 
+            salt: pwdHashAndSalt.salt
+        })
         const token = generateAuthToken({id: counter}, 'student')
         res.status(201).send({
             token
@@ -25,7 +30,7 @@ router.post('/students/signup', async (req, res) => {
 
 router.post('/students/login', async (req, res) => {
     try {
-
+        
     }
     catch(e){
 
@@ -34,10 +39,10 @@ router.post('/students/login', async (req, res) => {
 
 router.post('/students/logout', auth, async (req, res) => {
     try {
-
+        res.status(200).send(req.user)
     }
     catch (e){
-        
+        res.status(500).send()
     }
 })
 

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const {dbSession} = require('../db/session')
 
 const auth = async (req, res, next) => {
     try {
@@ -7,10 +8,10 @@ const auth = async (req, res, next) => {
 
         if (decoded.type.localeCompare("student")){
             //retrieve user according to ID
-            const user = "a"
+            const user = dbSession.findStudentById(decoded.id)
         }
         else if (decoded.type.localeCompare("tutor")){
-            const user = "a"
+            const user = dbSession.findTutorById(decoded.id)
         }
         if (!user){
             throw new Error()
