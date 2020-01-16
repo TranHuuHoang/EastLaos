@@ -51,7 +51,7 @@ router.post('/students/login', async (req, res) => {
 
 router.post('/students/logout', auth, async (req, res) => {
     try {
-        res.status(200).send(req.user)
+        res.send("Successfully Logged Out")
     }
     catch (e){
         res.status(500).send()
