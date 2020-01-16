@@ -45,14 +45,6 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
-  async updateStudentPassword(param = {id: 0, password: "", salt: ""}) {
-    const {id, password, salt} = param;
-    await this.executeSQL(
-      `UPDATE student
-      SET password = "${password}", salt = "${salt}"
-      WHERE id = ${id}`
-    );
-  }
   async findStudentById(id = 0) {
     const out = await this.executeSQL(
       `SELECT id, email, password, salt
@@ -112,14 +104,6 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
-  async updateTutorPassword(param = {id: 0, password: "", salt: ""}) {
-    const {id, password, salt} = param;
-    await this.executeSQL(
-      `UPDATE tutor
-      SET password = "${password}", salt = "${salt}"
-      WHERE id = ${id}`
-    );
-  }
   async findTutorById(id = 0) {
     const out = await this.executeSQL(
       `SELECT id, email, password, salt
@@ -172,6 +156,46 @@ const Session = class {
       `INSERT INTO course
       VALUES (${id}, "${code}", "${name}", "${info}")`
     );
+  }
+  async deleteCourse(id = 0) {
+    await this.executeSQL(
+      `DELETE FROM course
+      WHERE id = ${id}`
+    );
+  }
+  async findCourseById(id = 0) {
+    const out = await this.executeSQL(
+      `SELECT id, code, name, info
+      FROM course
+      WHERE id = ${id}`
+    );
+    if (out.length >= 1) {
+      return {
+        id: out[0][0],
+        code: out[0][1],
+        name: out[0][2],
+        info: out[0][3],
+      };
+    } else {
+      return undefined;
+    }
+  }
+  async findCourseByCode(code = "") {
+    const out = await this.executeSQL(
+      `SELECT id, code, name, info
+      FROM course
+      WHERE code = ${code}`
+    );
+    if (out.length >= 1) {
+      return {
+        id: out[0][0],
+        code: out[0][1],
+        name: out[0][2],
+        info: out[0][3],
+      };
+    } else {
+      return undefined;
+    }
   }
 }
 
