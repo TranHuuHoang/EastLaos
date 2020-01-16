@@ -5,13 +5,17 @@ const sha512 = require('../utils/pwdHashSalt')
 const generateAuthToken = require('../utils/generateToken')
 const {dbSession} = require('../db/session')
 
-let counter = 1
-
 router.post('/students/signup', async (req, res) => {
     try {
         const student = req.body
         const pwdHashAndSalt = sha512(student.password)
-        counter++
+        let counter = await dbSession.maxStudentId()
+        if (!counter){
+            counter = 1
+        }
+        else {
+            counter++
+        }
         await dbSession.createStudent({
             id: counter, 
             email: student.email, 

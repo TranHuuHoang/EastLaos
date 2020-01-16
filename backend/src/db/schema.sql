@@ -33,6 +33,7 @@ CREATE TABLE course (
   id        int(32) NOT NULL,
   code      varchar(8) NOT NULL,
   name      varchar(256) NOT NULL,
+  info      varchar(8000),
   CONSTRAINT uaCourseId UNIQUE(id),
   CONSTRAINT uaCourseCode UNIQUE(code)
 );
