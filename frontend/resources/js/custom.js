@@ -154,14 +154,28 @@ var datazip = course_code.map(function(ele, i) {
   return [ele, course_name[i], course_description[i]];
 });
 
-$(document).ready(function() {
-    $('#course_table').DataTable( {
-        data: datazip,
-        columns: [
-            {title: "Course Code"},
-            {title: "Course Name"},
-            {title: "Course Information"},
-            // {title: "Subscribe Now"},
-        ]
-    } );
-} );
+// $(document).ready(function() {
+//     $('#course_table').DataTable({
+//         data: datazip,
+//         columns: [
+//             {title: "Course Code"},
+//             {title: "Course Name"},
+//             {title: "Course Information"},
+//         ]
+//     });
+// } );
+
+
+
+
+// Material Design example
+$(document).ready(function () {
+  $('#course_table').DataTable({
+      data: datazip,
+      columns: [
+          {title: "Course Code"},
+          {title: "Course Name"},
+          {title: "Course Information"},
+      ]
+  });
+});
