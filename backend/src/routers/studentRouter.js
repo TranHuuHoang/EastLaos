@@ -80,4 +80,8 @@ router.post('/student_unregis_course', auth, async (req, res) => {
     }
 })
 
+router.get('/', async (req, res) => {
+    res.send("Cac")
+})
+
 module.exports = router
