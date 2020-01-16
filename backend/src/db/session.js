@@ -21,6 +21,17 @@ const Session = class {
     return result.fetchAll();
   }
   // student
+  async maxStudentId() {
+    const out = await this.executeSQL(
+      `SELECT MAX(id)
+      FROM student;`
+    )
+    if (out.length >= 1) {
+      return out[0][0];
+    } else {
+      return undefined;
+    }
+  }
   async createStudent(param = {id: 0, email: "", password: "", salt: ""}) {
     const {id, email, password, salt} = param;
     await this.executeSQL(
@@ -28,7 +39,7 @@ const Session = class {
       VALUES (${id}, "${email}", "${password}", "${salt}")`
     );
   }
-  async deleteStudent(id) {
+  async deleteStudent(id = 0) {
     await this.executeSQL(
       `DELETE FROM student
       WHERE id = ${id}`
@@ -42,7 +53,7 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
-  async findStudentById(id) {
+  async findStudentById(id = 0) {
     const out = await this.executeSQL(
       `SELECT id, email, password, salt
       FROM student
@@ -59,7 +70,7 @@ const Session = class {
       return undefined;
     }
   }
-  async findStudentByEmail(email) {
+  async findStudentByEmail(email = "") {
     const out = await this.executeSQL(
       `SELECT id, email, password, salt
       FROM student
@@ -77,6 +88,17 @@ const Session = class {
     }
   }
   // tutor
+  async maxTutorId() {
+    const out = await this.executeSQL(
+      `SELECT MAX(id)
+      FROM tutor;`
+    )
+    if (out.length >= 1) {
+      return out[0][0];
+    } else {
+      return undefined;
+    }
+  }
   async createTutor(param = {id: 0, email: "", password: "", salt: ""}) {
     const {id, email, password, salt} = param;
     await this.executeSQL(
@@ -84,7 +106,7 @@ const Session = class {
       VALUES (${id}, "${email}", "${password}", "${salt}")`
     );
   }
-  async deleteTutor(id) {
+  async deleteTutor(id = 0) {
     await this.executeSQL(
       `DELETE FROM tutor
       WHERE id = ${id}`
@@ -98,7 +120,7 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
-  async findTutorById(id) {
+  async findTutorById(id = 0) {
     const out = await this.executeSQL(
       `SELECT id, email, password, salt
       FROM tutor
@@ -115,7 +137,7 @@ const Session = class {
       return undefined;
     }
   }
-  async findTutorByEmail(email) {
+  async findTutorByEmail(email = "") {
     const out = await this.executeSQL(
       `SELECT id, email, password, salt
       FROM tutor
@@ -131,6 +153,25 @@ const Session = class {
     } else {
       return undefined;
     }
+  }
+  // course
+  async maxCourseId() {
+    const out = await this.executeSQL(
+      `SELECT MAX(id)
+      FROM course;`
+    )
+    if (out.length >= 1) {
+      return out[0][0];
+    } else {
+      return undefined;
+    }
+  }
+  async createCourse(param = {id: 0, code: "", name: "", info: ""}) {
+    const {id, code, name, info} = param;
+    await this.executeSQL(
+      `INSERT INTO course
+      VALUES (${id}, "${code}", "${name}", "${info}")`
+    );
   }
 }
 

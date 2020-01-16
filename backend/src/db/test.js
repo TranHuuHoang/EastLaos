@@ -22,15 +22,23 @@ const execFile = async function(filename) {
 const test = async function() {
   try {
     await execFile("./src/db/schema.sql");
-    session.createStudent({
+    await session.createStudent({
       id: 1, 
       email: "casca",
       password: "cascas",
       salt: "cascas234",
     })
-    session.findStudentById(2).then(function(value) {
-      console.log(value)
-    });
+    await session.createStudent({
+      id: 2, 
+      email: "cascab",
+      password: "cascas",
+      salt: "cascas234",
+    })
+    const out = await session.executeSQL(
+      `SELECT MAX(id)
+      FROM student;`
+    )
+    console.log(out);
   } catch (e) {
     console.log(e);
   }
