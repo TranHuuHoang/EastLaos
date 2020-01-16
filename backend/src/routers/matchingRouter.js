@@ -53,9 +53,13 @@ router.post('/tutor_match/:course_code', auth, async (req, res) => {
     }
 })
 
-router.delete('/student_match/:course_code', auth, async (req, res) => {
+router.delete('/student_match', auth, async (req, res) => {
     try {
-        const courseCode = req.params.course_code
+        const courseCode = req.body.course_code
+        const course = await dbSession.findCourseByCode(courseCode)
+        if (!course){
+            throw new Error("Wrong course code!")
+        }
         await dbSession.deleteStudentMatch({
             studentId: req.user.id,
             courseId: courseCode
