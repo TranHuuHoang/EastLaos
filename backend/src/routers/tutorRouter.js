@@ -10,7 +10,7 @@ router.post('/tutors/signup', async (req, res) => {
     try {
         const tutor = req.body
         const pwdHashAndSalt = sha512(tutor.password)
-        let counter = await dbSession.maxTutorId
+        let counter = await dbSession.maxTutorId()
         if (!counter){
             counter = 1
         }
