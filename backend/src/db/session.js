@@ -197,6 +197,36 @@ const Session = class {
       return undefined;
     }
   }
+  // studentmatch
+  async createStudentMatch(param = {studentId = 0, courseId = 0}) {
+    const {studentId, courseId} = param;
+    await this.executeSQL(
+      `INSERT INTO studentmatch
+      VALUES (${studentId}, ${courseId})`
+    );
+  }
+  async deleteStudentMatch(param = {studentId = 0, courseId = 0}) {
+    const {studentId, courseId} = param;
+    await this.executeSQL(
+      `DELETE FROM studentmatch
+      WHERE (studentId = ${studentId} AND courseId = ${courseId})`
+    );
+  }
+  // tutormatch 
+  async createTutorMatch(param = {tutorId = 0, courseId = 0}) {
+    const {tutorId, courseId} = param;
+    await this.executeSQL(
+      `INSERT INTO tutor
+      VALUES (${tutorId}, ${courseId})`
+    );
+  }
+  async deleteTutorMatch(param = {tutorId = 0, courseId = 0}) {
+    const {tutorId, courseId} = param;
+    await this.executeSQL(
+      `DELETE FROM tutor
+      WHERE (tutorId = ${tutorId} AND courseId = ${courseId})`
+    );
+  }
 }
 
 const dbSession = new Session()
