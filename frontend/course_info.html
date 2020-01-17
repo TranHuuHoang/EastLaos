@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Bootstrap and Jquery -->
+  <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+  <script type="text/javascript" src="resources/js/jquery.min.js"></script>
+  <script type="text/javascript" src="resources/vendor/bootstrap/js/popper.min.js"></script>
+  <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+  <!-- Custom javascript -->
+  <script type="text/javascript" src="resources/js/course_info.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin:24px 0;">
+    <a class="navbar-brand" href="javascript:void(0)">EastLaos</a>
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navb" style="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Subscribed Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Log out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="signup.html">Sign up</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-success my-2 my-sm-0" type="button">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4" id="courseName">Hello World!</h1>
+      <p class="lead">
+        <b id="courseCode">CS0001</b>
+      </p>
+      <hr class="my-4">
+      <p id="courseInfo">You probably open this website inpropriately! This website is used only when directed from course list page.</p>
+      <div class="lead d-flex justify-content-center">
+        <a class="btn btn-primary btn-lg m-2 mt-4 w-25" href="#" role="button">I want to be a student</a>
+        <a class="btn btn-warning btn-lg m-2 mt-4 w-25" href="#" role="button">I want to be a tutor</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
