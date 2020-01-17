@@ -211,6 +211,11 @@ $(document).ready(function() {
       "targets": 0,
       "visible": false,
       "searchable": false
+    }, {
+      "targets": 1,
+      "render": function(data, type, row) {
+        return `<a class="courseLink" onclick="courseInfo(this, ${row[0]})" href="#${row[0]}">${row[1]}</a>`
+      }
     }]
   });
 
@@ -223,3 +228,17 @@ $(document).ready(function() {
     subscribeButton.addClass("btn-light");
   });
 });
+
+function courseInfo(self, courseID) {
+  courseData = $(self).parents().eq(1).map(function(i, v) {
+    var $td = $('td', this)
+    return {
+      id: ++i,
+      code: $td.eq(0).text(),
+      name: $td.eq(1).text(),
+      information: $td.eq(2).text()
+    }
+  }).get()[0];
+  sessionStorage.setItem("courseData", JSON.stringify(courseData));
+  location.replace("course_info.html")
+}
