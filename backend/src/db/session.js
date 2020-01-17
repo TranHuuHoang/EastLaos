@@ -163,6 +163,20 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
+  async allCourse() {
+    const out = await this.executeSQL(
+      `SELECT id, code, name, info
+      FROM course`
+    );
+    if (out.length >= 1) {
+      return out.map(function(item) {
+        return {id: item[0], code: item[1], name: item[2], info: item[3]};
+      }) 
+    } else {
+      return undefined;
+    }
+
+  }
   async findCourseById(id = 0) {
     const out = await this.executeSQL(
       `SELECT id, code, name, info
