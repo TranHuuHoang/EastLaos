@@ -143,6 +143,7 @@ var json_string = String.raw`{
     "Fertile how old address did showing because sitting replied six"
   ]
 }`;
+
 var course_list = JSON.parse(json_string);
 
 course_code = course_list["code"];
@@ -153,7 +154,7 @@ var datazip = course_code.map(function(ele, i) {
   return [ele, course_name[i], course_description[i]];
 });
 
-// Material Design example
+// Create table
 $(document).ready(function () {
   var table = $('#course_table').DataTable({
       data: datazip,
@@ -166,12 +167,39 @@ $(document).ready(function () {
       "columnDefs": [{
             "targets": -1,
             "data": null,
-            "defaultContent": "<a class=\"btn btn-success btn-sm\" href=#>Subscribe</a>"
+            "defaultContent": `
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#subscribeModal">
+                Subscribe
+              </button>
+
+              <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="subscribeModalLabel">Confirmation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="cancel">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="course_info">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Subscribe</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `,
       }]
   });
 
-  $('#course_table tbody').on('click', 'a', function () {
+  $('#course_table tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
-        alert("Course code: "+ data[0]);
+        var course_info = "<p><b>Course code:</b> " + data[0] + "</p>" +
+                          "<p><b>Course name:</b> " + data[1] + "</p>" +
+                          "<p><b>Course information:</b> " + data[2] + "</p>"
+        $("#course_info").html(course_info);
     } );
 });
