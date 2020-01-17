@@ -18,7 +18,7 @@ const createMatchingGraph = function(studentMatches = [{studentId: 0, courseId: 
   tutorMatches.forEach(function(item) {
     const {tutorId} = item;
     if (!tutorMap.has(tutorId)) {
-      tutorMap.set(tutorId, new Tutor([sink]))
+      tutorMap.set(tutorId, new Tutor(tutorId, [sink]))
     }
   });
   // TutorMatch
@@ -28,7 +28,7 @@ const createMatchingGraph = function(studentMatches = [{studentId: 0, courseId: 
     if (!tutorMatchMap.has(courseId)) {
       tutorMatchMap.set(courseId, []);
     }
-    tutorMatchMap.get(courseId).push(new TutorMatch([tutorMap.get(tutorId)]));
+    tutorMatchMap.get(courseId).push(new TutorMatch(tutorId, courseId, [tutorMap.get(tutorId)]));
   });
   // StudentMatch
   const studentMatchMap = new Map(); // studentId -> [studentMatch]
@@ -37,14 +37,14 @@ const createMatchingGraph = function(studentMatches = [{studentId: 0, courseId: 
     if (!studentMatchMap.has(studentId)) {
       studentMatchMap.set(studentId, []);
     }
-    studentMatchMap.get(studentId).push(new StudentMatch(tutorMatchMap.get(courseId)));
+    studentMatchMap.get(studentId).push(new StudentMatch(studentId, courseId, tutorMatchMap.get(courseId)));
   });
   // Student
   const studentMap = new Map(); // studentId -> Student
   studentMatches.forEach(function(item) {
     const {studentId} = item;
     if (!studentMap.has(studentId)) {
-      studentMap.set(studentId, new Student(studentMatchMap.get(studentId)));
+      studentMap.set(studentId, new Student(studentId, studentMatchMap.get(studentId)));
     }
   });
   // Source
