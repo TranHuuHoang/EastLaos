@@ -10,8 +10,7 @@ const map2array = function(mapIn = new Map()) {
 };
 
 
-const createMatchingGraph = function(matchingRequest = {studentMatches: [{studentId: 0, courseId: 0},], tutorMatches: [{tutorId: 0, courseId: 0},]}) {
-  const {studentMatches, tutorMatches} = matchingRequest;
+const createMatchingGraph = function(studentMatches = [{studentId: 0, courseId: 0},], tutorMatches = [{tutorId: 0, courseId: 0},]) {
   // Sink
   const sink = new Sink();
   // Tutor
@@ -52,3 +51,18 @@ const createMatchingGraph = function(matchingRequest = {studentMatches: [{studen
   const source = new Source(map2array(studentMap).value);
   return {source, studentMap, studentMatchMap, tutorMatchMap, tutorMap, sink};
 }
+
+const graph = createMatchingGraph(
+  [
+    {studentId: 1, courseId: 1},
+    {studentId: 1, courseId: 2},
+    {studentId: 2, courseId: 1}
+  ],
+  [
+    {tutorId: 1, courseId: 1},
+    {tutorId: 2, courseId: 1},
+    {tutorId: 2, courseId: 2}
+  ],
+);
+
+console.log();
