@@ -163,6 +163,15 @@ const Session = class {
       WHERE id = ${id}`
     );
   }
+  async allCourse() {
+    const out = await this.executeSQL(
+      `SELECT id, code, name, info
+      FROM course`
+    );
+    return out.map(function(item) {
+      return {id: item[0], code: item[1], name: item[2], info: item[3]};
+    }) 
+  }
   async findCourseById(id = 0) {
     const out = await this.executeSQL(
       `SELECT id, code, name, info
@@ -197,6 +206,36 @@ const Session = class {
       return undefined;
     }
   }
+  // studentsubscription
+  async createStudentSubscription(param = {studentId: 0, courseId: 0}) {
+    const {studentId, courseId} = param;
+    await this.executeSQL(
+      `INSERT INTO studentsubscription
+      VALUES (${studentId}, ${courseId})`
+    );
+  }
+  async deleteStudentSubscription(param = {studentId: 0, courseId: 0}) {
+    const {studentId, courseId} = param;
+    await this.executeSQL(
+      `DELETE FROM studentsubscription
+      WHERE (studentId = ${studentId} AND courseId = ${courseId})`
+    );
+  }
+  // tutorsubscription
+  async createTutorSubscription(param = {tutorId: 0, courseId: 0}) {
+    const {tutorId, courseId} = param;
+    await this.executeSQL(
+      `INSERT INTO tutorsubscription
+      VALUES (${tutorId}, ${courseId})`
+    );
+  }
+  async deleteTutorSubscription(param = {tutorId: 0, courseId: 0}) {
+    const {tutorId, courseId} = param;
+    await this.executeSQL(
+      `DELETE FROM tutorsubscription
+      WHERE (tutorId = ${tutorId} AND courseId = ${courseId})`
+    );
+  }
   // studentmatch
   async createStudentMatch(param = {studentId: 0, courseId: 0}) {
     const {studentId, courseId} = param;
@@ -216,16 +255,34 @@ const Session = class {
   async createTutorMatch(param = {tutorId: 0, courseId: 0}) {
     const {tutorId, courseId} = param;
     await this.executeSQL(
-      `INSERT INTO tutor
+      `INSERT INTO tutormatch
       VALUES (${tutorId}, ${courseId})`
     );
   }
   async deleteTutorMatch(param = {tutorId: 0, courseId: 0}) {
     const {tutorId, courseId} = param;
     await this.executeSQL(
-      `DELETE FROM tutor
+      `DELETE FROM tutormatch
       WHERE (tutorId = ${tutorId} AND courseId = ${courseId})`
     );
+  }
+  // matching
+  async allMatchingRequest() {
+    const studentMatches = await this.executeSQL(
+      `SELECT studentId, courseId
+      FROM studentmatch`
+    );
+    const tutorMatches = await this.executeSQL(
+      `SELECT tutorId, courseId
+      FROM tutormatch`
+    );
+    const out1 = studentMatches.map(function(item) {
+      return {studentId: item[0], courseId: item[1]};
+    });
+    const out2 = tutorMatches.map(function(item) {
+      return {tutorId: item[0], courseId: item[1]};
+    });
+    return {studentMatches: out1, tutorMatches: out2};
   }
 }
 

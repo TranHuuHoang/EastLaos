@@ -46,7 +46,13 @@ const test = async function() {
       name: "khong",
       info: "cz4041 info",
     })
-
+    await session.createCourse({
+      id: 2,
+      code: "cz4042",
+      name: "khong",
+      info: "cz4041 info",
+    })
+    console.log(await session.allCourse())
   } catch (e) {
     console.log(e);
   }

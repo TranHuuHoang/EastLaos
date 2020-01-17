@@ -63,21 +63,39 @@ router.post('/tutors/logout', auth, async (req, res) => {
     }
 })
 
-router.post('/tutor_regis_course', auth, async (req, res) => {
+router.post('/tutor_subscribe_course', auth, async (req, res) => {
     try {
-
+        const courseCode = req.body.course_code
+        const course = await dbSession.findCourseByCode(courseCode)
+        if (!course){
+            throw new Error("Wrong course code!")
+        }
+        await dbSession.createTutorSubscription({
+            tutorId: req.user.id,
+            courseId: course.id
+        })
+        res.send("Successfully subscribed the course!")
     }
     catch (e){
-
+        res.status(500).send(e.message)
     }
 })
 
-router.post('/tutor_unregis_course', auth, async (req, res) => {
+router.post('/tutor_unsubscribe_course', auth, async (req, res) => {
     try {
-
+        const courseCode = req.body.course_code
+        const course = await dbSession.findCourseByCode(courseCode)
+        if (!course){
+            throw new Error("Wrong course code!")
+        }
+        await dbSession.deleteTutorSubscription({
+            tutorId: req.user.id,
+            courseId: course.id
+        })
+        res.send("Successfully unsubscribed the course!")
     }
     catch (e){
-        
+        res.status(500).send(e.message)
     }
 })
 

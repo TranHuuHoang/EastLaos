@@ -21,6 +21,16 @@ router.get('/course_details/:course_code', auth, async(req, res) => {
     }
 })
 
+router.get('/courses', auth, async (req, res) => {
+    try {
+        const allCourses = dbSession.allCourse()
+        res.send(allCourses)
+    }
+    catch (e){
+        res.status(500).send(e.message)
+    }
+})
+
 // router.post('/courses', auth, async(req, res) => {
 //     try {
 //         let counter = await dbSession.maxCourseId()
