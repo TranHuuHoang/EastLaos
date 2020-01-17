@@ -8,6 +8,7 @@ const {dbSession} = require('../db/session')
 router.post('/students/signup', async (req, res) => {
     try {
         const student = req.body
+        console.log(req.body)
         const pwdHashAndSalt = sha512(student.password)
         let counter = await dbSession.maxStudentId()
         if (!counter){
@@ -29,6 +30,7 @@ router.post('/students/signup', async (req, res) => {
     }
     catch(e){
         res.status(400).send()
+        console.log(e.message)
     }
 })
 
@@ -53,7 +55,7 @@ router.post('/students/login', async (req, res) => {
     } 
 })
 
-router.post('/students/logout', auth, async (req, res) => {
+router.get('/students/logout', async (req, res) => {
     try {
         res.send("Successfully Logged Out")
     }

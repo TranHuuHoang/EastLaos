@@ -4,6 +4,7 @@ const courseRouter = require('./routers/courseRouter')
 const matchingRouter = require('./routers/matchingRouter')
 const quizRouter = require('./routers/quizRouter')
 const tutorRouter = require('./routers/tutorRouter')
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -16,5 +17,9 @@ app.use(courseRouter)
 app.use(matchingRouter)
 app.use(quizRouter)
 app.use(tutorRouter)
+
+// app.use(bodyParser.urlencoded({
+//     extended: true
+//   }));
 
 module.exports = app

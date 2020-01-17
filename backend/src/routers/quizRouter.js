@@ -3,6 +3,7 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const {dbSession} = require('../db/session')
 
+<<<<<<< HEAD
 // router.get('/quiz_mark', auth, async (req, res) => {
 //     try {
 
@@ -11,6 +12,16 @@ const {dbSession} = require('../db/session')
 
 //     }
 // })
+=======
+router.get('/quiz_mark', async (req, res) => {
+    try {
+        res.send("Cac")
+    }
+    catch (e){
+        res.send(e.message)
+    }
+})
+>>>>>>> frontend
 
 // router.get('/leaderboard', auth, async (req, res) => {
 //     try {
