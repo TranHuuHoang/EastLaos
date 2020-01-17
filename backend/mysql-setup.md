@@ -1,6 +1,6 @@
 # INSTALLATION
 
-- Install the package: `sudo apt-get install mysql-server`
+- Install the package: `sudo apt-get install mysql-community-server`
 
 - Start MySQL service: `sudo systemctl start mysql`
 
