@@ -1,6 +1,6 @@
 // json path
 // zip arrays
-var json_string = String.raw`{
+var json_string = String.raw `{
   "code": [
     "COR2202",
     "COR2203",
@@ -151,55 +151,75 @@ course_name = course_list["name"];
 course_description = course_list["description"];
 
 var datazip = course_code.map(function(ele, i) {
-  return [ele, course_name[i], course_description[i]];
+  return [i, ele, course_name[i], course_description[i]];
 });
 
 // Create table
-$(document).ready(function () {
+$(document).ready(function() {
   var table = $('#course_table').DataTable({
-      data: datazip,
-      columns: [
-          {title: "Course Code"},
-          {title: "Course Name"},
-          {title: "Course Information"},
-          {title: "Subscribe"},
-      ],
-      "columnDefs": [{
-            "targets": -1,
-            "data": null,
-            "defaultContent": `
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#subscribeModal">
+    data: datazip,
+    columns: [{
+        "title": "ID"
+      },
+      {
+        "title": "Course Name"
+      },
+      {
+        "title": "Course Name"
+      },
+      {
+        "title": "Course Information"
+      },
+      {
+        "title": "Subscribe"
+      },
+    ],
+    "columnDefs": [{
+      "targets": -1,
+      "data": null,
+      "width": "12%",
+      "render": function(data, type, row) {
+        return `
+              <button type="button" id="subscribeButton${row[0]}" class="btn btn-success btn-block" data-toggle="modal" data-target="#subscribeModal${row[0]}">
                 Subscribe
               </button>
 
-              <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+              <div class="modal fade" id="subscribeModal${row[0]}" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel${row[0]}" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="subscribeModalLabel">Confirmation</h5>
+                      <h5 class="modal-title" id="subscribeModalLabel${row[0]}">Confirmation</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="cancel">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body" id="course_info">
-                      ...
+                    <div class="modal-body">
+                      <p><b>Course code:</b> ${row[1]}</p>
+                      <p><b>Course name:</b> ${row[2]}</p>
+                      <p><b>Course information:</b> ${row[3]}</p>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary">Subscribe</button>
+                      <button type="button" class="btn btn-primary subscribeConfirm" data-dismiss="modal">Subscribe</button>
                     </div>
                   </div>
                 </div>
               </div>
-            `,
-      }]
+            `
+      }
+    }, {
+      "targets": 0,
+      "visible": false,
+      "searchable": false
+    }]
   });
 
-  $('#course_table tbody').on('click', 'button', function () {
-        var data = table.row($(this).parents('tr')).data();
-        var course_info = "<p><b>Course code:</b> " + data[0] + "</p>" +
-                          "<p><b>Course name:</b> " + data[1] + "</p>" +
-                          "<p><b>Course information:</b> " + data[2] + "</p>"
-        $("#course_info").html(course_info);
-    } );
+  $(".subscribeConfirm").on("click", function() {
+    var rowID = table.row($(this).parents('tr')).data()[0];
+    var subscribeButton = $(`#subscribeButton${rowID}`)
+    subscribeButton.prop("disabled", true);
+    subscribeButton.html("Subscribed");
+    subscribeButton.removeClass("btn-success");
+    subscribeButton.addClass("btn-light");
+  });
 });
