@@ -38,6 +38,24 @@ CREATE TABLE course (
   CONSTRAINT uaCourseCode UNIQUE(code)
 );
 
+-- SUBSCIPTION
+
+CREATE TABLE studentsubscription (
+  studentId int(32),
+  courseId  int(32),
+  CONSTRAINT uaStudentSubscription UNIQUE(studentId, courseId),
+  FOREIGN KEY (studentId) REFERENCES student(id),
+  FOREIGN KEY (courseId) REFERENCES course(id)
+);
+
+CREATE TABLE tutorsubscription (
+  tutorId   int(32),
+  courseId  int(32),
+  CONSTRAINT uaTutorSubscription UNIQUE(tutorId, courseId),
+  FOREIGN KEY (tutorId) REFERENCES tutor(id),
+  FOREIGN KEY (courseId) REFERENCES course(id)
+);
+
 -- MATCHING
 
 CREATE TABLE studentmatch (

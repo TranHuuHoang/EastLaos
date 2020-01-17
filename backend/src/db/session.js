@@ -211,6 +211,36 @@ const Session = class {
       return undefined;
     }
   }
+  // studentsubscription
+  async createStudentSubscription(param = {studentId: 0, courseId: 0}) {
+    const {studentId, courseId} = param;
+    await this.executeSQL(
+      `INSERT INTO studentsubscription
+      VALUES (${studentId}, ${courseId})`
+    );
+  }
+  async deleteStudentSubscription(param = {studentId: 0, courseId: 0}) {
+    const {studentId, courseId} = param;
+    await this.executeSQL(
+      `DELETE FROM studentsubscription
+      WHERE (studentId = ${studentId} AND courseId = ${courseId})`
+    );
+  }
+  // tutorsubscription
+  async createTutorSubscription(param = {tutorId: 0, courseId: 0}) {
+    const {tutorId, courseId} = param;
+    await this.executeSQL(
+      `INSERT INTO tutorsubscription
+      VALUES (${tutorId}, ${courseId})`
+    );
+  }
+  async deleteTutorSubscription(param = {tutorId: 0, courseId: 0}) {
+    const {tutorId, courseId} = param;
+    await this.executeSQL(
+      `DELETE FROM tutorsubscription
+      WHERE (tutorId = ${tutorId} AND courseId = ${courseId})`
+    );
+  }
   // studentmatch
   async createStudentMatch(param = {studentId: 0, courseId: 0}) {
     const {studentId, courseId} = param;
@@ -230,14 +260,14 @@ const Session = class {
   async createTutorMatch(param = {tutorId: 0, courseId: 0}) {
     const {tutorId, courseId} = param;
     await this.executeSQL(
-      `INSERT INTO tutor
+      `INSERT INTO tutormatch
       VALUES (${tutorId}, ${courseId})`
     );
   }
   async deleteTutorMatch(param = {tutorId: 0, courseId: 0}) {
     const {tutorId, courseId} = param;
     await this.executeSQL(
-      `DELETE FROM tutor
+      `DELETE FROM tutormatch
       WHERE (tutorId = ${tutorId} AND courseId = ${courseId})`
     );
   }
