@@ -3,23 +3,23 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const {dbSession} = require('../db/session')
 
-router.get('/quiz_mark', auth, async (req, res) => {
-    try {
+// router.get('/quiz_mark', auth, async (req, res) => {
+//     try {
 
-    }
-    catch (e){
+//     }
+//     catch (e){
 
-    }
-})
+//     }
+// })
 
-router.get('/leaderboard', auth, async (req, res) => {
-    try {
+// router.get('/leaderboard', auth, async (req, res) => {
+//     try {
 
-    }
-    catch (e){
+//     }
+//     catch (e){
         
-    }
-})
+//     }
+// })
 
 router.get('/quiz/:course_code', auth, async (req, res) => {
     try {
