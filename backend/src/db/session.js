@@ -8,7 +8,7 @@ const options = {
   host: "localhost",
   user: "test",
   password: "EastLaos312#",
-  schema: "EastLaos",
+  schema: "EastLaos"
 };
 
 const Session = class {

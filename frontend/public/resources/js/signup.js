@@ -24,14 +24,11 @@ $("#signup").click(function(){
     console.log(JSON.stringify(data.serializeObject()));
     $.ajax({
         url: urlStudent,
-        type:"post",
+        type:'post',
         // data: data.serializeObject(),
         data: {
-            "email": "a1@gmail",
-            "password": "1"
-        },
-        xhrFields: {
-            withCredentials: false
+            'email': 'a1@gmail',
+            'password': '1'
         },
         // dataType: 'json',
         // contentType: 'application/json',
