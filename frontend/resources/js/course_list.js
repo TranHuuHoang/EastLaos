@@ -162,7 +162,7 @@ $(document).ready(function() {
         "title": "ID"
       },
       {
-        "title": "Course Name"
+        "title": "Course Code"
       },
       {
         "title": "Course Name"
@@ -185,7 +185,7 @@ $(document).ready(function() {
               </button>
 
               <div class="modal fade" id="subscribeModal${row[0]}" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel${row[0]}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="subscribeModalLabel${row[0]}">Confirmation</h5>
