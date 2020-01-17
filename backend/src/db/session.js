@@ -241,6 +241,24 @@ const Session = class {
       WHERE (tutorId = ${tutorId} AND courseId = ${courseId})`
     );
   }
+  // matching
+  async allMatchingRequest() {
+    const studentMatches = await this.executeSQL(
+      `SELECT studentId, courseId
+      FROM studentmatch`
+    );
+    const tutorMatches = await this.executeSQL(
+      `SELECT tutorId, courseId
+      FROM tutormatch`
+    );
+    const out1 = studentMatches.map(function(item) {
+      return {studentId: item[0], courseId: item[1]};
+    });
+    const out2 = tutorMatches.map(function(item) {
+      return {tutorId: item[0], courseId: item[1]};
+    });
+    return {studentMatches: out1, tutorMatches: out2};
+  }
 }
 
 const dbSession = new Session()
